@@ -10,7 +10,7 @@ Checks the http request method and reroutes to the corresponding function
 #endif
 
 #include <string.h>
-#include <SFML\Network.hpp>
+#include <SFML/Network.hpp>
 
 #ifndef GET_H
     #include "get.hpp"

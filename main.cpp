@@ -11,10 +11,10 @@ Initializes the server, receives requests and reroutes to other functions for th
 #endif
 
 #include <iostream>
-#include <SFML\Network.hpp>
+#include <SFML/Network.hpp>
 
 #ifndef METHODS_H
-    #include "methods\methods.hpp"
+    #include "methods/methods.hpp"
 #endif
 
 // Main function
