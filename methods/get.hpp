@@ -49,17 +49,20 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
     char open_path[] = "../Frontend";
 
     bool request_is_legit = fileIncluded(request_path, open_path);
+    bool path_is_file = std::filesystem::is_regular_file(const_request_path);
 
     // Check if the file is accessible by the client
     if(!request_is_legit) {
         std::cout << "[ERROR] File path requested by the client is forbidden\n";
         std::cout << "[HTTP-RESPONSE] Error 403 - Forbidden\n";
+        sendResponse(client, "../Frontend/errors/403.html", "403 ERROR", "text/html");
         return;
     }
     // Check if the file exists
-    else if(!std::filesystem::is_regular_file(const_request_path)) {
+    if(!path_is_file) {
         std::cout << "[ERROR] File path requested by the client was not found\n";
         std::cout << "[HTTP-RESPONSE] Error 404 - Not found\n";
+        sendResponse(client, "../Frontend/errors/404.html", "404 ERROR", "text/html");
         return;
     }
 
