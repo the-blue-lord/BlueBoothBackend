@@ -11,6 +11,7 @@ Contains useful functions for the backend files
 
 #include <fstream>
 #include <filesystem>
+#include <string.h>
 
 // Function to read the contents of a file
 char* readFile(const char* path, char* result, size_t length)
@@ -52,16 +53,16 @@ bool fileIncluded(char* file_path, char directory_path[])
 }
 
 // Function that returns a pointer to the stert of the last extension in a filename
-char* getFileExtension(const char* filename)
+const char* getFileExtension(const char* filename)
 {
     // Find the last dot to appear in the string
-    char* lastDot = strrchr(filename, '.');
+    const char* lastDot = strrchr(filename, '.');
 
     // Retun nullptr if there is no dot or it's a hidden file (which starts widtha a dot)
     if(!lastDot || lastDot == filename) return nullptr;
 
     // Create a pointer to next character in the string after the last dot
-    char* result = lastDot+1;
+    const char* result = lastDot+1;
 
     // Return nullptr if the string ends with a dot
     if(*result == '\0') return nullptr;

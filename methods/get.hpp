@@ -68,7 +68,7 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
 
     // Allocate space to store the response content type
     char filetype[32] = "*/*";
-    char* extension = getFileExtension(request_path);
+    const char* extension = getFileExtension(request_path);
 
     // Get the response content type
     if(!strcmp(extension, "html")) strcpy(filetype, "text/html");
