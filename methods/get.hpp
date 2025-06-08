@@ -66,8 +66,19 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
         return;
     }
 
-    // Reroute to the response function 
-    sendResponse(client, const_request_path, "200 OK", "text/html");
+    // Allocate space to store the response content type
+    char filetype[32] = "*/*";
+    char* extension = getFileExtension(request_path);
+
+    // Get the response content type
+    if(!strcmp(extension, "html")) strcpy(filetype, "text/html");
+    else if(!strcmp(extension, "txt")) strcpy(filetype, "text/*");
+    else if(!strcmp(extension, "js")) strcpy(filetype, "text/javascript");
+    else if(!strcmp(extension, "css")) strcpy(filetype, "text/css");
+    else strcpy(filetype, "*/*");
+
+    // Reroute to the response function
+    sendResponse(client, const_request_path, "200 OK", filetype);
     
     return;
 }
@@ -76,9 +87,9 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
 void sendResponse(sf::TcpSocket &client, const char* request_path, const char* status, const char *type)
 {
     // Fetch the file content
-    size_t file_size = std::filesystem::file_size(request_path)+1;
-    char content[file_size];
-    readFile(request_path, content, file_size);
+    size_t file_size = std::filesystem::file_size(request_path);
+    char content[file_size+1];
+    readFile(request_path, content, sizeof(content));
 
     // Fetch the file size
     char tmp_str[10];

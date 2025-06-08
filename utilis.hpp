@@ -28,9 +28,11 @@ char* readFile(const char* path, char* result, size_t length)
     if(file_size >= length) file_size = length - 1;
 
     // Read the file
-    if(!file.read(result, length)) return nullptr;
+    if(!file.read(result, file_size)) return nullptr;
 
-    result[length] = '\0';
+    result[file_size] = '\0';
+
+    std::cout << result << "\n";
 
     return result;
 }
@@ -47,4 +49,23 @@ bool fileIncluded(char* file_path, char directory_path[])
 
     // Return weather the directory path is a substring of the filepath
     return mismatches.first == directory.end();
+}
+
+// Function that returns a pointer to the stert of the last extension in a filename
+char* getFileExtension(const char* filename)
+{
+    // Find the last dot to appear in the string
+    char* lastDot = strrchr(filename, '.');
+
+    // Retun nullptr if there is no dot or it's a hidden file (which starts widtha a dot)
+    if(!lastDot || lastDot == filename) return nullptr;
+
+    // Create a pointer to next character in the string after the last dot
+    char* result = lastDot+1;
+
+    // Return nullptr if the string ends with a dot
+    if(*result == '\0') return nullptr;
+
+    // Return the pointer previously created and checked
+    return result;
 }
