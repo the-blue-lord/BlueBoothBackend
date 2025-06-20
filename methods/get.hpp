@@ -44,7 +44,7 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
     sprintf(request_path, "../Frontend%.*s", request_path_length, start);
 
     // Log the client's request
-    std::cout << "-v-v-v-v-v-v-v-\n[HTTP-GET-REQUEST]\nPath: " << request_path << "\n-^-^-^-^-^-^-^-\n";
+    std::cout << "-v-v-v-v-v-v-v-\n[HTTP-GET-REQUEST]\nPath: " << request_path << "\nIpAdress: " << client.getRemoteAddress() << "\n-^-^-^-^-^-^-^-\n";
 
     char open_path[] = "../Frontend";
 
