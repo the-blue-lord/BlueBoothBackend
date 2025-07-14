@@ -39,14 +39,14 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
 
     // Fetch the request filepath
     size_t request_path_length = end - start;
-    char request_path[request_path_length+15];
+    char request_path[request_path_length+20];
     const char* const_request_path = request_path;
-    sprintf(request_path, "../Frontend%.*s", request_path_length, start);
+    sprintf(request_path, "../../Frontend%.*s", request_path_length, start);
 
     // Log the client's request
     std::cout << "-v-v-v-v-v-v-v-\n[HTTP-GET-REQUEST]\nPath: " << request_path << "\nIpAdress: " << client.getRemoteAddress() << "\n-^-^-^-^-^-^-^-\n";
 
-    char open_path[] = "../Frontend";
+    char open_path[] = "../../Frontend";
 
     bool request_is_legit = fileIncluded(request_path, open_path);
     bool path_is_file = std::filesystem::is_regular_file(const_request_path);
@@ -55,14 +55,14 @@ void manageGet(sf::TcpSocket &client, char* request, size_t request_length)
     if(!request_is_legit) {
         std::cout << "[ERROR] File path requested by the client is forbidden\n";
         std::cout << "[HTTP-RESPONSE] Error 403 - Forbidden\n";
-        sendResponse(client, "../Frontend/errors/403.html", "403 ERROR", "text/html");
+        sendResponse(client, "../../Frontend/errors/403.html", "403 ERROR", "text/html");
         return;
     }
     // Check if the file exists
     if(!path_is_file) {
         std::cout << "[ERROR] File path requested by the client was not found\n";
         std::cout << "[HTTP-RESPONSE] Error 404 - Not found\n";
-        sendResponse(client, "../Frontend/errors/404.html", "404 ERROR", "text/html");
+        sendResponse(client, "../../Frontend/errors/404.html", "404 ERROR", "text/html");
         return;
     }
 
