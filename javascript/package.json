@@ -1,7 +1,6 @@
 {
   "scripts": {
-    "start": "node serve.js",
-    "dev": "nodemon server.js"
+    "start": "npx nodemon server.js"
   },
   "dependencies": {
     "express": "^5.1.0",
