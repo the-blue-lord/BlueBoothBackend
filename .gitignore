@@ -3,4 +3,5 @@ main.exe
 sfml-network-2.dll
 sfml-system-2.dll
 node_modules
-javascript
+express
+socket.io
