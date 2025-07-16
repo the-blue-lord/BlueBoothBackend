@@ -1,14 +1,22 @@
+require("./socket");
+
 const express = require("express");
 const path = require("path");
+const { manageError, SERVER_PORT, FRONTEND_FOLDER } = require("./utilis");
 
-const SERVER_PORT = 6266;
-const FRONTEND_FOLDER = path.join(__dirname, "../../Frontend/build");
+const gamesRouter = require("./routes/games");
 
 const app = express();
 app.listen(SERVER_PORT);
 
 app.use(express.static(FRONTEND_FOLDER));
 
+app.get("/", (req, res) => {
+   res.sendFile(path.join(FRONTEND_FOLDER, "homepagetest/homepage.html"));
+});
+
+app.use("/games", gamesRouter);
+
 app.use((req, res) => {
-    res.status(404).sendFile(path.join(FRONTEND_FOLDER, "errors/404.html"));
+    manageError(res, 404, "Page not found");
 });
