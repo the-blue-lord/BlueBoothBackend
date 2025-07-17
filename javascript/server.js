@@ -2,7 +2,7 @@ require("./socket");
 
 const express = require("express");
 const path = require("path");
-const { manageError } = require("./utilis");
+const { manageError } = require("./utils");
 const { SERVER_PORT, FRONTEND_FOLDER } = require("./config");
 
 const gamesRouter = require("./routes/games");
