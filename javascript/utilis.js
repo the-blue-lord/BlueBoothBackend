@@ -1,9 +1,5 @@
 const path = require("path");
-
-const SERVER_PORT = 6266;
-const SOCKET_PORT = 6445;
-
-const FRONTEND_FOLDER = path.join(__dirname, "../../Frontend/build");
+const { FRONTEND_FOLDER } = require("./config");
 
 function manageError(res, status, message) {
     switch(status) {
@@ -16,16 +12,6 @@ function manageError(res, status, message) {
     }
 }
 
-const GAMES = [
-    "snake"
-];
-
-
-
 module.exports = {
-    manageError,
-    SERVER_PORT,
-    SOCKET_PORT,
-    FRONTEND_FOLDER,
-    GAMES
+    manageError
 }

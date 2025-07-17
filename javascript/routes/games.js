@@ -1,6 +1,7 @@
 const express = require("express")
 const path = require("path");
-const { manageError, FRONTEND_FOLDER, GAMES } = require("../utilis");
+const { manageError } = require("../utils");
+const { FRONTEND_FOLDER, GAMES } = require("../config");
 
 const router = express.Router();
 
