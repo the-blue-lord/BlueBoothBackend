@@ -6,8 +6,7 @@ const SOCKET_PORT = 6445;
 const FRONTEND_FOLDER = path.join(__dirname, "../../Frontend/build");
 
 const GAMES = [
-    "snake",
-    "snake-v2"
+    "snake"
 ];
 
 
